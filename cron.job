@@ -1,0 +1,8 @@
+## one time run this on command line manually
+#pmset repeat wakeorpoweron MTWRFSU 23:59:00 sleep MTWRFSU 00:01:00
+
+59 23 * * * pmset repeat wakeorpoweron MTWRFSU 17:24:00 sleep MTWRFSU 17:26:00
+25 17 * * * python3 /Users/vas/python/smartPlug/operate.py on >/tmp/operate.err 2>&1 
+
+25 17 * * * pmset repeat wakeorpoweron MTWRFSU 23:59:00 sleep MTWRFSU 00:01:00
+00 00 * * * python3 /Users/vas/python/smartPlug/operate.py off >/tmp/operate.err 2>&1
