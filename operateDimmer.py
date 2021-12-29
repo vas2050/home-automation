@@ -13,33 +13,31 @@ from kasa import Discover, SmartDimmer;
 
 DEVICES_NOT = [];
 DEVICE_CACHE = {};
-DELAY = 0.2;
+DELAY = 0.7;
 BLINK_DELAY = .2;
-STEP = 10;
+START, STOP, STEP = 40, 100, 5;
 
 async def danceMyStyle(device, style = None):
    if style == 'asc':
-      start, stop, step = 5, 100, STEP; 
-      for num in range(start, stop, step):
+      for num in range(START, STOP + 1, STEP):
          await device.set_brightness(num);
          await asyncio.sleep(DELAY);
 
    elif style == 'dsc':
-      start, stop, step = 100, 5, -STEP; 
-      for num in range(start, stop, step):
+      for num in range(STOP, START + 1, -STEP):
          await device.set_brightness(num);
          await asyncio.sleep(DELAY);
 
    elif style == 'blink':
       for num in range(0, 6):
-         await device.set_brightness(100);
+         await device.set_brightness(STOP);
          await asyncio.sleep(BLINK_DELAY);
-         await device.set_brightness(5);
+         await device.set_brightness(START);
          await asyncio.sleep(BLINK_DELAY);
 
    elif style == 'random':
       for num in range(0, 6):
-         num = random.randrange(5, 100, 5);
+         num = random.randrange(START, STOP + 1, STEP);
          await device.set_brightness(num);
          await asyncio.sleep(DELAY);
 
