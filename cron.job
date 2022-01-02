@@ -1,8 +1,12 @@
 ## one time run this on command line manually
-#pmset repeat wakeorpoweron MTWRFSU 23:59:00 sleep MTWRFSU 00:01:00
+#pmset repeat wakeorpoweron MTWRFSU 01:59:00 sleep MTWRFSU 02:01:00
 
-59 23 * * * pmset repeat wakeorpoweron MTWRFSU 17:24:00 sleep MTWRFSU 17:26:00
-25 17 * * * python3 /Users/vas/python/smartPlug/operate.py on >/tmp/operate.err 2>&1 
+## operate smarties
+#21 17 * * * python3 /Users/vas/python/smartPlug/operate_smarties.py on >/tmp/operate.err 2>&1
+#21 17 * * * pmset repeat wakeorpoweron MTWRFSU 03:59:00 sleep MTWRFSU 04:01:00
+#00 04 * * * python3 /Users/vas/python/smartPlug/operate_smarties.py off >/tmp/operate.err 2>&1
+#00 04 * * * pmset repeat wakeorpoweron MTWRFSU 17:20:00 sleep MTWRFSU 17:22:00
 
-25 17 * * * pmset repeat wakeorpoweron MTWRFSU 23:59:00 sleep MTWRFSU 00:01:00
-00 00 * * * python3 /Users/vas/python/smartPlug/operate.py off >/tmp/operate.err 2>&1
+# dance my style
+#21 17 * * * python3 /Users/vas/python/smartPlug/dance_dimmer.py mixed >/dev/null 2>&1
+#00 04 * * * ps -ef | grep "dance_dimmer.py mixed" | grep -v grep | awk '{print $2}' | xargs kill -9 >/dev/null 2>&1
